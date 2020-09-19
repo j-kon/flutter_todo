@@ -10,7 +10,7 @@ class DatabaseHelper {
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
         return db.execute(
-          "CREATE TABLE task(id INTEGER PRIMARY KEY, title TEXT, description TEXT)",
+          "CREATE TABLE tasks(id INTEGER PRIMARY KEY, title TEXT, description TEXT)",
         );
       },
     );
@@ -18,7 +18,7 @@ class DatabaseHelper {
 
   Future<void> insertTask(Task task) async {
     Database _db = await database();
-    await _db.insert('task', task.toMap(),
+    await _db.insert('tasks', task.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 }

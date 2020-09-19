@@ -40,14 +40,11 @@ class _TaskPageState extends State<TaskPage> {
                         Expanded(
                           child: TextField(
                             onSubmitted: (value) async {
-                              print('Field value :$value');
-
-                              if (value != "")
+                              if (value != "") {
                                 DatabaseHelper _dbHelper = DatabaseHelper();
-
-                              Task _newTask = Task(title: value);
-                              await _dbHelper.insertTask(_newTask);
-                              print('New Task Has Been Created');
+                                Task _newTask = Task(title: value);
+                                _dbHelper.insertTask(_newTask);
+                              }
                             },
                             decoration: InputDecoration(
                               hintText: 'Enter Task Title',
