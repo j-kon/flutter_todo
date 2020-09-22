@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/taskpage.dart';
+import 'package:flutter_todo/database_helper.dart';
+import 'package:flutter_todo/screens/taskpage.dart';
 import 'package:flutter_todo/widgets.dart';
 
-class HomePage extends StatefulWidget {
+class Homepage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomepageState createState() => _HomepageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomepageState extends State<Homepage> {
+  DatabaseHelper _dbHelper = DatabaseHelper();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(
-            horizontal: 24.0,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
           color: Color(0xFFF6F6F6),
           child: Stack(
             children: [
@@ -33,17 +34,39 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Expanded(
-                    child: ScrollConfiguration(
-                      behavior: NoGlowBehaviour(),
-                      child: ListView(
-                        children: [
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                        ],
-                      ),
+                    child: FutureBuilder(
+                      initialData: [],
+                      future: _dbHelper.getTasks(),
+                      builder: (context, snapshot) {
+                        return ScrollConfiguration(
+                          behavior: NoGlowBehaviour(),
+                          child: ListView.builder(
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Taskpage(
+                                        task: snapshot.data[index],
+                                      ),
+                                    ),
+                                  ).then(
+                                    (value) {
+                                      setState(() {});
+                                    },
+                                  );
+                                },
+                                child: TaskCardWidget(
+                                  title: snapshot.data[index].title,
+                                  desc: snapshot.data[index].description,
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     ),
                   )
                 ],
@@ -56,40 +79,30 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TaskPage(),
-                      ),
-                    );
+                          builder: (context) => Taskpage(
+                                task: null,
+                              )),
+                    ).then((value) {
+                      setState(() {});
+                    });
                   },
                   child: Container(
-                    width: 60.0,
-                    height: 60.0,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color(0xFF7349FF),
-                          Color(0xFF643FDB),
-                        ],
-                        begin: Alignment(
-                          0.0,
-                          -1.0,
-                        ),
-                        end: Alignment(
-                          0.0,
-                          1.0,
-                        ),
+                      width: 60.0,
+                      height: 60.0,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Color(0xFF7349FE), Color(0xFF643FDB)],
+                            begin: Alignment(0.0, -1.0),
+                            end: Alignment(0.0, 1.0)),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                      borderRadius: BorderRadius.circular(
-                        20.0,
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ),
+                      child: Icon(
+                        Icons.delete,
+                        size: 30,
+                        color: Colors.white,
+                      )),
                 ),
-              ),
+              )
             ],
           ),
         ),
