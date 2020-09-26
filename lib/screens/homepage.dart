@@ -101,8 +101,8 @@ class _HomepageState extends State<Homepage> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Icon(
-                        Icons.add_comment,
-                        size: 30,
+                        Icons.note_add,
+                        size: 40,
                         color: Colors.white,
                       )),
                 ),

@@ -196,11 +196,15 @@ class _TaskpageState extends State<Taskpage> {
                               right: 12.0,
                             ),
                             decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(6.0),
-                                border: Border.all(
-                                    color: Color(0xFF86829D), width: 1.5)),
-                            child: Icon(Icons.check, size: 15,),
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(6.0),
+                              border: Border.all(
+                                  color: Color(0xFF86829D), width: 1.5),
+                            ),
+                            child: Icon(
+                              Icons.check,
+                              size: 15,
+                            ),
                           ),
                           Expanded(
                             child: TextField(
