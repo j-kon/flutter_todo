@@ -91,13 +91,17 @@ class _HomepageState extends State<Homepage> {
                       height: 60.0,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: [Color(0xFF7349FE), Color(0xFF643FDB)],
-                            begin: Alignment(0.0, -1.0),
-                            end: Alignment(0.0, 1.0)),
+                          colors: [
+                            Color(0xFF0175C2),
+                            Color(0xFF13B9FD),
+                          ],
+                          begin: Alignment(0.0, -1.0),
+                          end: Alignment(0.0, 1.0),
+                        ),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Icon(
-                        Icons.delete,
+                        Icons.add_comment,
                         size: 30,
                         color: Colors.white,
                       )),
