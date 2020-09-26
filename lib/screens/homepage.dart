@@ -102,7 +102,7 @@ class _HomepageState extends State<Homepage> {
                       ),
                       child: Icon(
                         Icons.note_add,
-                        size: 40,
+                        size: 30,
                         color: Colors.white,
                       )),
                 ),

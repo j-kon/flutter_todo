@@ -204,6 +204,7 @@ class _TaskpageState extends State<Taskpage> {
                             child: Icon(
                               Icons.check,
                               size: 15,
+                              color: Colors.white,
                             ),
                           ),
                           Expanded(
@@ -229,7 +230,7 @@ class _TaskpageState extends State<Taskpage> {
                                 }
                               },
                               decoration: InputDecoration(
-                                hintText: "Enter Todo item...",
+                                hintText: "Enter Todo Items...",
                                 border: InputBorder.none,
                               ),
                             ),
